@@ -19,8 +19,7 @@ BEGIN
  = ltrim(rtrim(V_USUARIO));
 	if (v_Exists=1)then 
 
-		select cat_lo_usuario into V_USUARIO2 from cat_logins where ltrim(rtrim(CAT_LO  
-_NOMBRE)) = ltrim(rtrim(V_USUARIO));
+		select cat_lo_usuario into V_USUARIO2 from cat_logins where ltrim(rtrim(CAT_LO_NOMBRE)) = ltrim(rtrim(V_USUARIO));
 	end if; 
 
 		INSERT INTO HIST_ALERTAS_GESTION(  
@@ -57,7 +56,7 @@ VISTO is null AND HIST_AL_USUARIO = V_USUARIO;
     TO_CHAR(HIST_AL_DTEVIGENCIA,'dd/mm/rrrr') "Fecha de vigencia",
     CASE WHEN HIST_AL_DTEVISTO IS NULL THEN '0' ELSE '1' END "Visto"
     FROM HIST_ALERTAS_GESTION WHERE HIST_AL_USUARIO = V_USUARIO and  trunc(HIST_
-AL_DTEVIGENCIA) >= trunc(sysdate) order by HIST_AL_DTECREADA desc;
+AL_DTEVIGENCIA) >= trunc(sysdate);
   ELSIF V_BANDERA = 4 THEN
     OPEN CV_1 FOR SELECT COUNT(*) FROM HIST_ALERTAS_GESTION WHERE HIST_AL_USUARI
 O = V_USUARIO AND HIST_AL_DTEVISTO IS NULL;
