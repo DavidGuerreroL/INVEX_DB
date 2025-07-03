@@ -11,28 +11,21 @@ AS
     cliente varchar(26);
 Begin
     IF V_BANDERA=0 THEN --Creditos Relacionados
-        select pr_mc_grupo into v_grupo from pr_mc_gral where pr_mc_expediente =
- V_Expediente;
+        select pr_mc_grupo into v_grupo from pr_mc_gral where pr_mc_expediente = V_Expediente;
 
             OPEN CV_1 FOR
-            select pr_mc_expediente "Expediente", pr_mc_credito "Cr�dito", pr_mc
-_grupo "Grupo" ,
-            PR_CL_NOMBRE "Nombre", pr_mc_cliente "Cliente", PR_CL_ORIGINACION "E
-mpresa", PR_CL_MONTO_VENCIDO "Saldo Vencido", 
-            TO_CHAR(PR_CL_CURRENT_BALANCE) "Saldo total", pr_mc_dteasigna "Fecha
- Asignaci�n", pr_mc_estatus "Estatus", 
-            PR_CL_PHONE1 "Tel�fono Casa / Celular", PR_CL_PHONE3 "Tel�fono Emple
-o"
-            FROM pr_cliente JOIN pr_mc_gral ON pr_mc_expediente  = PR_CL_EXPEDIE
-NTE_MC
+            select pr_mc_expediente "Expediente", pr_mc_credito "Cr�dito", pr_mc_grupo "Grupo" ,
+            PR_CL_NOMBRE "Nombre", pr_mc_cliente "Cliente", PR_CL_ORIGINACION "Empresa", PR_CL_MONTO_VENCIDO "Saldo Vencido", 
+            TO_CHAR(PR_CL_CURRENT_BALANCE) "Saldo total", pr_mc_dteasigna "Fecha Asignaci�n", pr_mc_estatus "Estatus", 
+            PR_CL_PHONE1 "Tel�fono Casa / Celular", PR_CL_PHONE3 "Tel�fono Empleo"
+            FROM pr_cliente JOIN pr_mc_gral ON pr_mc_expediente  = PR_CL_EXPEDIENTE_MC
             where PR_MC_CLIENTE = v_Cliente
             AND pr_mc_expediente != V_Expediente
             ;
 
     ELSIF V_BANDERA = 1 THEN
     BEGIN
-        SELECT PR_MC_CREDITO into V_CREDITO FROM PR_MC_GRAL WHERE PR_MC_EXPEDIEN
-TE=V_EXPEDIENTE;
+        SELECT PR_MC_CREDITO into V_CREDITO FROM PR_MC_GRAL WHERE PR_MC_EXPEDIENTE=V_EXPEDIENTE;
         OPEN CV_1 FOR
         SELECT /*+ LEADING(HIST_RELACIONADOS PR_MC_GRAL)*/
             pr_mc_expediente EXPEDIENTE,
@@ -51,8 +44,7 @@ TE=V_EXPEDIENTE;
             HIST_RG_TELCASA "TEL CASA",
             HIST_RG_TELOFICINA "TEL OFICINA"
         FROM HIST_RELACIONADOS JOIN
-            PR_MC_GRAL ON HIST_RG_CUENTA=PR_MC_CREDITO AND HIST_RG_GRUPO=PR_MC_G
-RUPO
+            PR_MC_GRAL ON HIST_RG_CUENTA=PR_MC_CREDITO AND HIST_RG_GRUPO=PR_MC_GRUPO
             WHERE HIST_RG_CUENTA=V_CREDITO;
     END;
 
@@ -62,12 +54,9 @@ RUPO
            into V_CREDITO,cliente 
            FROM PR_MC_GRAL WHERE PR_MC_EXPEDIENTE=V_EXPEDIENTE;
 
-          OPEN CV_1 FOR 'SELECT EXPEDIENTE "Expediente", concat(concat(''Credito
-: '',CREDITO),concat('' Grupo: '',GRUPO)) "Cr�dito", NOMBRE "Nombre", CLIENTE "C
-liente"
+          OPEN CV_1 FOR 'SELECT EXPEDIENTE "Expediente", concat(concat(''Credito: '',CREDITO),concat('' Grupo: '',GRUPO)) "Cr�dito", NOMBRE "Nombre", CLIENTE "Cliente"
             FROM HIST_BUSQUEDA
-            WHERE CLIENTE = '''|| cliente ||''' AND CREDITO != '''|| V_CREDITO |
-|''' ';
+            WHERE CLIENTE = '''|| cliente ||''' AND CREDITO != '''|| V_CREDITO ||''' ';
 
     END;
     End If;
