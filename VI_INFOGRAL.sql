@@ -1,26 +1,15 @@
-CREATE OR REPLACE FORCE EDITIONABLE VIEW "VI_INFOGRAL" ("PR_MC_COMENT
-ARIO", "PR_MC_GRUPO", "PR_MC_EXPEDIENTE", "PR_MC_CLIENTE", "PR_MC_CREDITO", "PR_
-MC_PRODUCTO", "PR_MC_SUBPRODUCTO", "PR_MC_ESTATUS", "PR_MC_CODIGO", "PR_MC_RESUL
-TADO", "PR_MC_ACCION", "PR_MC_UNIVERSO_CC", "PR_MC_MUESTRA_CC", "PR_MC_ACUERDOS_
-ROTOS", "PR_MC_CAUSANOPAGO", "PR_MC_DESPACHOASIGNADO", "PR_MC_DTEFILAPREV", "PR_
-MC_ESTATUS_PROMESA", "PR_MC_ETIQUETA", "PR_MC_EXCLUSION", "PR_MC_IDREGLAASIG", "
-PR_MC_INSTANCIA", "PR_MC_INSTANCIAPREV", "PR_MC_LATITUD", "PR_MC_LONGITUD", "PR_
-MC_MTOPAGOFALTANTENEG", "PR_MC_MTOPAGOFALTANTEPAR", "PR_MC_MTOPAGONEG", "PR_MC_M
-TOPAGONEGCUMP", "PR_MC_MTOPAGOPAR", "PR_MC_MTOPAGOPARCUMP", "PR_MC_NOMBREFILA", 
-"PR_MC_NOPROMNEGCUMP", "PR_MC_NOPROMNEGINC", "PR_MC_NOPROMNEGOCIACION", "PR_MC_N
-OPROMPARCIALES", "PR_MC_NOPROMPARCUMP", "PR_MC_NOPROMPARINC", "PR_MC_DTE_VIGENCI
-A", "PR_MC_FECHA_CC", "PR_MC_TIPO_CC", "PR_MC_DTEGESTION", "PR_MC_UASIGNADO", "P
-R_MC_UASIGNADO_ANT", "PR_MC_USUARIO", "PR_MC_DTEPCONTACTO", "PR_MC_NOGESTIONES",
- "PR_MC_CODRELEV", "PR_MC_RESULTADORELEV", "PR_MC_DTERESULTADORELEV", "PR_MC_COD
-IGOVISITA", "PR_MC_RESULTADOV", "PR_MC_DTEVISITA", "PR_MC_NOVISITAS", "PR_MC_VIS
-ITADOR", "PR_MC_FILA", "PR_MC_DTEFILA", "PR_MC_MODAL", "PR_MC_SECFILA", "PR_MC_M
-ONTOPP", "PR_MC_DTEPP", "PR_MC_MTOUP", "PR_MC_DTEUP", "PR_MC_DTECARGAINI", "PR_M
-C_DTECARGA", "PR_MC_DTERETIRO", "PR_MC_AGENCIA", "PR_MC_DTEASIGNA", "PR_MC_DTEAS
-IGNAV", "PR_MC_DTEASIGNAV_ANT", "PR_MC_DTEASIGNA_ANT", "PR_MC_CREDITOCONTACTADO"
-, "PR_MC_DTECREDITOCONTACTADO", "PR_MC_PRIMERAGESTION", "PR_MC_DTEPRIMERAGESTION
-", "PR_MC_UASIGNADOV", "PR_MC_UASIGNADOV_ANT", "PR_MC_DTEREACTIVA", "VI_SEMAFORO
-_GESTION", "VI_DIAS_SEMAFORO_GESTION") AS 
-  SELECT
+--------------------------------------------------------
+-- 45394-EAC-030725  
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for View VI_INFOGRAL
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "VI_INFOGRAL" ("PR_MC_COMENTARIO", "PR_MC_GRUPO", "PR_MC_EXPEDIENTE", "PR_MC_CLIENTE", "PR_MC_CREDITO", "PR_MC_PRODUCTO", "PR_MC_SUBPRODUCTO", "PR_MC_ESTATUS", "PR_MC_CODIGO", "PR_MC_RESULTADO", "PR_MC_ACCION", "PR_MC_UNIVERSO_CC", "PR_MC_MUESTRA_CC", "PR_MC_ACUERDOS_ROTOS", "PR_MC_CAUSANOPAGO", "PR_MC_DESPACHOASIGNADO", "PR_MC_DTEFILAPREV", "PR_MC_ESTATUS_PROMESA", "PR_MC_ETIQUETA", "PR_MC_EXCLUSION", "PR_MC_IDREGLAASIG", "PR_MC_INSTANCIA", "PR_MC_INSTANCIAPREV", "PR_MC_LATITUD", "PR_MC_LONGITUD", "PR_MC_MTOPAGOFALTANTENEG", "PR_MC_MTOPAGOFALTANTEPAR", "PR_MC_MTOPAGONEG", "PR_MC_MTOPAGONEGCUMP", "PR_MC_MTOPAGOPAR", "PR_MC_MTOPAGOPARCUMP", "PR_MC_NOMBREFILA", "PR_MC_NOPROMNEGCUMP", "PR_MC_NOPROMNEGINC", "PR_MC_NOPROMNEGOCIACION", "PR_MC_NOPROMPARCIALES", "PR_MC_NOPROMPARCUMP", "PR_MC_NOPROMPARINC", "PR_MC_DTE_VIGENCIA", "PR_MC_FECHA_CC", "PR_MC_TIPO_CC", "PR_MC_DTEGESTION", "PR_MC_UASIGNADO", "PR_MC_UASIGNADO_ANT", "PR_MC_USUARIO", "PR_MC_DTEPCONTACTO", "PR_MC_NOGESTIONES", "PR_MC_CODRELEV", "PR_MC_RESULTADORELEV", "PR_MC_DTERESULTADORELEV", "PR_MC_CODIGOVISITA", "PR_MC_RESULTADOV", "PR_MC_DTEVISITA", "PR_MC_NOVISITAS", "PR_MC_VISITADOR", "PR_MC_FILA", "PR_MC_DTEFILA", "PR_MC_MODAL", "PR_MC_SECFILA", "PR_MC_MONTOPP", "PR_MC_DTEPP", "PR_MC_MTOUP", "PR_MC_DTEUP", "PR_MC_DTECARGAINI", "PR_MC_DTECARGA", "PR_MC_DTERETIRO", "PR_MC_AGENCIA", "PR_MC_DTEASIGNA", "PR_MC_DTEASIGNAV", "PR_MC_DTEASIGNAV_ANT", "PR_MC_DTEASIGNA_ANT", "PR_MC_CREDITOCONTACTADO", "PR_MC_DTECREDITOCONTACTADO", "PR_MC_PRIMERAGESTION", "PR_MC_DTEPRIMERAGESTION", "PR_MC_UASIGNADOV", "PR_MC_UASIGNADOV_ANT", "PR_MC_DTEREACTIVA", "VI_SEMAFORO_GESTION", "VI_DIAS_SEMAFORO_GESTION") AS 
+  WITH CatCodigo AS (
+  SELECT CAT_CO_VERDE,CAT_CO_AMARILLO,(NVL(CAT_CO_ACCION, '') || NVL(CAT_CO_RESULTADO, '')) CODIGO FROM CAT_CODIGOS
+)
+SELECT 
         NVL(PR_MC_COMENTARIO, ' ') PR_MC_COMENTARIO,
         NVL(PR_MC_GRUPO, 0) PR_MC_GRUPO,
         NVL(PR_MC_EXPEDIENTE, ' ') PR_MC_EXPEDIENTE,
@@ -38,6 +27,7 @@ _GESTION", "VI_DIAS_SEMAFORO_GESTION") AS
         NVL(PR_MC_CAUSANOPAGO, ' ') PR_MC_CAUSANOPAGO,
         NVL(PR_MC_DESPACHOASIGNADO,' ') PR_MC_DESPACHOASIGNADO,
         NVL(TO_CHAR(PR_MC_DTEFILAPREV,'DD/MM/YYYY'),' ') PR_MC_DTEFILAPREV,
+
         NVL(PR_MC_ESTATUS_PROMESA,' ') PR_MC_ESTATUS_PROMESA,
         NVL(PR_MC_ETIQUETA, ' ') PR_MC_ETIQUETA,
         NVL(TO_CHAR(PR_MC_EXCLUSION), ' ') PR_MC_EXCLUSION,
@@ -61,13 +51,12 @@ _GESTION", "VI_DIAS_SEMAFORO_GESTION") AS
         NVL(PR_MC_NOPROMPARINC,0 )  PR_MC_NOPROMPARINC,
         CASE
             WHEN PR_MC_DTE_VIGENCIA IS NULL
-                 OR TO_CHAR(PR_MC_DTE_VIGENCIA, 'DD/MM/YYYY') = '01/01/1900' THE
-N
+                 OR TO_CHAR(PR_MC_DTE_VIGENCIA, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTE_VIGENCIA)
         END AS PR_MC_DTE_VIGENCIA     ,
-	CASE 
+	CASE
             WHEN PR_MC_FECHA_CC IS NULL
                  OR TO_CHAR(PR_MC_FECHA_CC, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
@@ -87,8 +76,7 @@ N
         NVL(PR_MC_USUARIO, ' ') PR_MC_USUARIO,
         CASE
             WHEN PR_MC_DTEPCONTACTO IS NULL
-                 OR TO_CHAR(PR_MC_DTEPCONTACTO, 'DD/MM/YYYY') = '01/01/1900' THE
-N
+                 OR TO_CHAR(PR_MC_DTEPCONTACTO, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTEPCONTACTO)
@@ -98,8 +86,7 @@ N
         NVL(PR_MC_RESULTADORELEV, ' ') PR_MC_RESULTADORELEV,
         CASE
             WHEN PR_MC_DTERESULTADORELEV IS NULL
-                 OR TO_CHAR(PR_MC_DTERESULTADORELEV, 'DD/MM/YYYY') = '01/01/1900
-' THEN
+                 OR TO_CHAR(PR_MC_DTERESULTADORELEV, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTERESULTADORELEV)
@@ -144,7 +131,6 @@ N
         CASE
             WHEN PR_MC_DTECARGAINI IS NULL
                  OR TO_CHAR(PR_MC_DTECARGAINI, 'DD/MM/YYYY') = '01/01/1900' THEN
-
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTECARGAINI)
@@ -180,16 +166,14 @@ N
         END AS PR_MC_DTEASIGNAV,
         CASE
             WHEN PR_MC_DTEASIGNAV_ANT IS NULL
-                 OR TO_CHAR(PR_MC_DTEASIGNAV_ANT, 'DD/MM/YYYY') = '01/01/1900' T
-HEN
+                 OR TO_CHAR(PR_MC_DTEASIGNAV_ANT, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTEASIGNAV_ANT)
         END AS PR_MC_DTEASIGNAV_ANT,
         CASE
             WHEN PR_MC_DTEASIGNA_ANT IS NULL
-                 OR TO_CHAR(PR_MC_DTEASIGNA_ANT, 'DD/MM/YYYY') = '01/01/1900' TH
-EN
+                 OR TO_CHAR(PR_MC_DTEASIGNA_ANT, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTEASIGNA_ANT)
@@ -197,8 +181,7 @@ EN
         NVL(PR_MC_CREDITOCONTACTADO, 0) PR_MC_CREDITOCONTACTADO,
         CASE
             WHEN PR_MC_DTECREDITOCONTACTADO IS NULL
-                 OR TO_CHAR(PR_MC_DTECREDITOCONTACTADO, 'DD/MM/YYYY') = '01/01/1
-900' THEN
+                 OR TO_CHAR(PR_MC_DTECREDITOCONTACTADO, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTECREDITOCONTACTADO)
@@ -206,8 +189,7 @@ EN
         NVL(PR_MC_PRIMERAGESTION, ' ') PR_MC_PRIMERAGESTION,
         CASE
             WHEN PR_MC_DTEPRIMERAGESTION IS NULL
-                 OR TO_CHAR(PR_MC_DTEPRIMERAGESTION, 'DD/MM/YYYY') = '01/01/1900
-' THEN
+                 OR TO_CHAR(PR_MC_DTEPRIMERAGESTION, 'DD/MM/YYYY') = '01/01/1900' THEN
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTEPRIMERAGESTION)
@@ -217,101 +199,36 @@ EN
         CASE
             WHEN PR_MC_DTEREACTIVA IS NULL
                  OR TO_CHAR(PR_MC_DTEREACTIVA, 'DD/MM/YYYY') = '01/01/1900' THEN
-
                 TO_DATE('01/01/1900')
             ELSE
                 TO_DATE(PR_MC_DTEREACTIVA)
         END AS PR_MC_DTEREACTIVA,
         (
             CASE
-                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) <= (
-                    SELECT
-                        CAT_CO_VERDE
-                    FROM
-                        CAT_CODIGOS
-                    WHERE
-                        NVL(CAT_CO_ACCION, '')
-                        || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-                ) THEN
-                    'VERDE'
-                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) < (
-                    SELECT
-                        CAT_CO_AMARILLO
-                    FROM
-                        CAT_CODIGOS
-                    WHERE
-                        NVL(CAT_CO_ACCION, '')
-                        || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-                ) THEN
-                    'AMARILLO'
-                ELSE
-                    'ROJO'
+                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) <= NVL(CAT_CO_VERDE,0)
+                THEN 'VERDE'
+                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) < NVL(CAT_CO_AMARILLO,0)
+                THEN 'AMARILLO'
+                ELSE 'ROJO'
             END
         ) AS VI_SEMAFORO_GESTION,
         (
             CASE
-                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) <= (
-                    SELECT
-                        CAT_CO_VERDE
-                    FROM
-                        CAT_CODIGOS
-                    WHERE
-                        NVL(CAT_CO_ACCION, '')
-                        || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-                ) THEN
-                    ( ABS(ROUND((SYSDATE - PR_MC_DTEGESTION) -(
-                        SELECT
-                            CAT_CO_AMARILLO
-                        FROM
-                            CAT_CODIGOS
-                        WHERE
-                            NVL(CAT_CO_ACCION, '')
-                            || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-
-                    ))) )
-                    || ' Dias Para Cambiar A Semaforo Amarillo'
-                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) > (
-                    SELECT
-                        CAT_CO_VERDE
-                    FROM
-                        CAT_CODIGOS
-                    WHERE
-                        NVL(CAT_CO_ACCION, '')
-                        || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-                )
-                     AND ROUND(SYSDATE - PR_MC_DTEGESTION) < (
-                    SELECT
-                        CAT_CO_AMARILLO
-                    FROM
-                        CAT_CODIGOS
-                    WHERE
-                        NVL(CAT_CO_ACCION, '')
-                        || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-                ) THEN
-                    ( ABS(ROUND((SYSDATE - PR_MC_DTEGESTION) -(
-                        SELECT
-                            CAT_CO_AMARILLO
-                        FROM
-                            CAT_CODIGOS
-                        WHERE
-                            NVL(CAT_CO_ACCION, '')
-                            || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-
-                    ))) )
-                    || ' Dias Para Cambiar A Semaforo Rojo'
+                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) <= NVL(CAT_CO_VERDE,0) 
+                THEN
+                    ( ABS(ROUND((SYSDATE - PR_MC_DTEGESTION) - NVL(CAT_CO_AMARILLO ,0)
+                    ))) || ' Dias Para Cambiar A Semaforo Amarillo'
+                WHEN ROUND(SYSDATE - PR_MC_DTEGESTION) > CAT_CO_VERDE
+                     AND ROUND(SYSDATE - PR_MC_DTEGESTION) < NVL(CAT_CO_AMARILLO,0)
+                 THEN
+                    ( ABS(ROUND((SYSDATE - PR_MC_DTEGESTION) - NVL(CAT_CO_AMARILLO,0)
+                    ))) || ' Dias Para Cambiar A Semaforo Rojo'
                 ELSE
                     'Credito Sin Gestion o Gestionado Hace Mas De '
-                    || NVL((
-                        SELECT
-                            CAT_CO_AMARILLO
-                        FROM
-                            CAT_CODIGOS
-                        WHERE
-                            NVL(CAT_CO_ACCION, '')
-                            || NVL(CAT_CO_RESULTADO, '') = NVL(PR_MC_CODIGO, '')
-
-                    ), ABS(TRUNC(PR_MC_DTEASIGNA) - TRUNC(SYSDATE)))
+                    || NVL((CAT_CO_AMARILLO), ABS(TRUNC(PR_MC_DTEASIGNA) - TRUNC(SYSDATE)))
                     || ' Dias'
             END
         ) AS VI_DIAS_SEMAFORO_GESTION
         from pr_mc_gral
+        left join CatCodigo on NVL(PR_MC_CODIGO, '') = NVL(CODIGO, '')
+;
